@@ -1,10 +1,25 @@
-import { drizzle } from "drizzle-orm/libsql";
+import { createClient } from "@libsql/client/web";
 import { env } from "cloudflare:workers";
-import { createClient } from "@libsql/client";
+import { Kysely, CamelCasePlugin } from "kysely";
+import { LibsqlDialect } from "kysely-libsql";
+import type { DB } from "kysely-codegen";
 
-const client = createClient({
-	url: env.DATABASE_URL || "",
-	authToken: env.DATABASE_AUTH_TOKEN,
+export const client = createClient({
+  url: env.DATABASE_URL || "",
+  authToken: env.DATABASE_AUTH_TOKEN,
 });
 
-export const db = drizzle({ client });
+export const getKysely = async () => {
+  const dbClient = createClient({
+    url: env.DATABASE_URL || "",
+    authToken: env.DATABASE_AUTH_TOKEN,
+  });
+
+  const kysely = new Kysely<DB>({
+    dialect: new LibsqlDialect({ client: dbClient, concurrency: 1 }),
+    plugins: [new CamelCasePlugin()],
+    log: ["query", "error"],
+  });
+
+  return kysely;
+};

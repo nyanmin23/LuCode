@@ -23,7 +23,7 @@ export const sessions = sqliteTable("sessions", {
     .references(() => users.id),
 });
 
-export const accounts = sqliteTable("account", {
+export const accounts = sqliteTable("accounts", {
   id: text("id").primaryKey(),
   accountId: text("account_id").notNull(),
   providerId: text("provider_id").notNull(),
