@@ -10,7 +10,7 @@ This project was created with [Better-T-Stack](https://github.com/AmanVarshney01
 - **shadcn/ui** - Reusable UI components
 - **Hono** - Lightweight, performant server framework
 - **workers** - Runtime environment
-- **Prisma** - TypeScript-first ORM
+- **Drizzle** - TypeScript-first ORM
 - **SQLite/Turso** - Database engine
 - **Authentication** - Better-Auth
 - **Turborepo** - Optimized monorepo build system
@@ -24,7 +24,7 @@ pnpm install
 ```
 ## Database Setup
 
-This project uses SQLite with Prisma.
+This project uses SQLite with Drizzle ORM.
 
 1. Start the local SQLite database:
 ```bash
@@ -34,7 +34,7 @@ cd apps/server && pnpm db:local
 
 2. Update your `.env` file in the `apps/server` directory with the appropriate connection details if needed.
 
-3. Generate the Prisma client and push the schema:
+3. Apply the schema to your database:
 ```bash
 pnpm db:push
 ```
@@ -77,3 +77,4 @@ my-better-t-app/
 - `pnpm check-types`: Check TypeScript types across all apps
 - `pnpm db:push`: Push schema changes to database
 - `pnpm db:studio`: Open database studio UI
+- `cd apps/server && pnpm db:local`: Start the local SQLite database
