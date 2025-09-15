@@ -1,4 +1,5 @@
 {
   "camelCase": true,
-  "dialect": "libsql"
+  "dialect": "libsql",
+  "url": "env(KYSELY_DB_URL)"
 }
